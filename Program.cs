@@ -1,7 +1,20 @@
+using JobsApp.Models;
+using JobsApp.Models.Database;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var applicationConfig = builder.Configuration.Get<AppConfig>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var serverVersion = ServerVersion.AutoDetect(applicationConfig.ConnectionStrings.DefaultConnection);
+
+// 3. Register the DbContext
+builder.Services.AddDbContext<JobsContext>(options =>
+    options.UseMySql(applicationConfig.ConnectionStrings.DefaultConnection, serverVersion)
+);
 
 var app = builder.Build();
 
