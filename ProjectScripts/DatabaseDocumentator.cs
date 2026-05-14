@@ -5,7 +5,7 @@ namespace JobsApp.ProjectScripts
 {
     public class DatabaseDocumentator
     {
-        private AppConfig _appConfig;
+        private readonly AppConfig _appConfig;
         public DatabaseDocumentator(AppConfig appConfig)
         {
             _appConfig = appConfig;
@@ -13,8 +13,8 @@ namespace JobsApp.ProjectScripts
         public void DocumentDatabase()
         {
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string namespaceFilter = _appConfig.DatabaseDocumentator.DatabaseNamespace;
-            string cominedPath = Path.Combine(baseDirectory, _appConfig.DatabaseDocumentator.OutputPath);
+            string namespaceFilter = _appConfig.DatabaseDocumentatorConfig.DatabaseNamespace;
+            string cominedPath = Path.Combine(baseDirectory, _appConfig.DatabaseDocumentatorConfig.OutputPath);
             string outputPath = Path.GetFullPath(cominedPath);
 
 
@@ -42,9 +42,17 @@ namespace JobsApp.ProjectScripts
 
             mermaid.AppendLine(@"
 ```");
-
+            //creating the folder if does not exists
+            if (!Directory.Exists(outputPath))
+            {
+                Directory.CreateDirectory(outputPath);
+            }
+            if (File.Exists($@"{outputPath}\\{_appConfig.DatabaseDocumentatorConfig.FileName}"))
+            {
+                File.Delete($@"{outputPath}\\{_appConfig.DatabaseDocumentatorConfig.FileName}");
+            }
             // 3. Write to the specific location
-            File.WriteAllText(outputPath, mermaid.ToString());
+            File.WriteAllText($@"{outputPath}\\{_appConfig.DatabaseDocumentatorConfig.FileName}", mermaid.ToString());
 
         }
 

@@ -5,10 +5,14 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 var applicationConfig = builder.Configuration.Get<AppConfig>();
+if (applicationConfig == null)
+{
+    throw new Exception("Failed to load application configuration.");
+}
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<AppConfig>(applicationConfig);
+builder.Services.AddSingleton(applicationConfig);
 
 var serverVersion = ServerVersion.AutoDetect(applicationConfig.ConnectionStrings.DefaultConnection);
 
