@@ -8,6 +8,9 @@ namespace JobsApp.Controllers
     {
         public IActionResult Index()
         {
+            DatabaseDocumentator doc = new DatabaseDocumentator();
+            
+            
             return View();
         }
 

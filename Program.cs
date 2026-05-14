@@ -8,6 +8,7 @@ var applicationConfig = builder.Configuration.Get<AppConfig>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<AppConfig>(applicationConfig);
 
 var serverVersion = ServerVersion.AutoDetect(applicationConfig.ConnectionStrings.DefaultConnection);
 
