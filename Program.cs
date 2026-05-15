@@ -1,5 +1,7 @@
 using JobsApp.Models;
 using JobsApp.Models.Database.Migrations;
+using JobsApp.Models.Services;
+using JobsApp.Models.Services.Intefaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +16,7 @@ if (applicationConfig == null)
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton(applicationConfig);
+builder.Services.AddScoped<IUserAccountService, UserAccountService>();
 
 //Adding authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
