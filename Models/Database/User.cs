@@ -8,6 +8,7 @@ namespace JobsApp.Models.Database
         public string email { get; set; }
         public string phoneNumber { get; set; }
         public string jobTitle { get; set; }
+        public string password { get; set; }
 
         public int roleId { get; set; }
 

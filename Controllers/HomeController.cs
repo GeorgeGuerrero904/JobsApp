@@ -2,9 +2,11 @@ using JobsApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using JobsApp.ProjectScripts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobsApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public readonly AppConfig _appConfig;

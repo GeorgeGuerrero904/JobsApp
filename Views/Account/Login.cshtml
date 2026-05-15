@@ -1,0 +1,22 @@
+﻿<div class="container d-flex justify-content-center align-items-center min-vh-100 ">
+    <div class="col-5">
+        <form asp-controller="Account" asp-action="Login" method="post">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="pass" class="form-label">Password</label>
+                <input type="password" class="form-control" id="pass">
+            </div>
+            @if (!string.IsNullOrEmpty(ViewData["loginError"]?.ToString()))
+            {
+                <div class="invalid-feedback">
+                    ASDSADA
+                    @ViewData["loginError"].ToString()
+                </div>
+            }
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

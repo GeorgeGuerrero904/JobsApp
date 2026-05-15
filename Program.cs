@@ -1,5 +1,6 @@
 using JobsApp.Models;
-using JobsApp.Models.Database;
+using JobsApp.Models.Database.Migrations;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,11 +15,18 @@ if (applicationConfig == null)
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton(applicationConfig);
 
-var serverVersion = ServerVersion.AutoDetect(applicationConfig.ConnectionStrings.DefaultConnection);
+//Adding authentication
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.SlidingExpiration = true;
+    });
 
 // 3. Register the DbContext
 builder.Services.AddDbContext<JobsContext>(options =>
-    options.UseMySql(applicationConfig.ConnectionStrings.DefaultConnection, serverVersion)
+    options.UseMySql(applicationConfig.ConnectionStrings.DefaultConnection, ServerVersion.AutoDetect(applicationConfig.ConnectionStrings.DefaultConnection))
 );
 
 var app = builder.Build();
@@ -34,6 +42,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
