@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobsApp.Models.Database.Migrations
 {
     [DbContext(typeof(JobsContext))]
-    [Migration("20260515221616_updatePassword")]
-    partial class updatePassword
+    [Migration("20260518203957_initialAuthSetUp")]
+    partial class initialAuthSetUp
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,7 +112,7 @@ namespace JobsApp.Models.Database.Migrations
                             isActive = true,
                             jobTitle = "Admin",
                             name = "Jorge G",
-                            password = "",
+                            password = "$2a$11$LIObUQLwXqTc6BZQRbuUQuuQZpJVIgcrhzHfziGf75npjMSS4UNkO",
                             phoneNumber = "3224785546",
                             roleId = 1
                         });

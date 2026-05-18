@@ -21,7 +21,7 @@ namespace JobsApp.Models.Database.Migrations
             );
 
             modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, name = "Jorge G", email = "jorgeG@test.com", isActive = true, jobTitle = "Admin", password = "", roleId = 1, phoneNumber = "3224785546" }
+                new User { Id = 1, name = "Jorge G", email = "jorgeG@test.com", isActive = true, jobTitle = "Admin", password = BCrypt.Net.BCrypt.HashPassword("Test123"), roleId = 1, phoneNumber = "3224785546" }
                 );
         }
     }

@@ -1,22 +1,25 @@
-﻿<div class="container d-flex justify-content-center align-items-center min-vh-100 ">
+﻿@model JobsApp.Models.ViewModels.Account.LoginViewModel
+
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100 ">
     <div class="col-5">
         <form asp-controller="Account" asp-action="Login" method="post">
             <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control"  name="userEmail" id="email" aria-describedby="emailHelp">
+                <label asp-for="Email" class="form-label">Email address</label>
+                <input asp-for="Email" type="email" class="form-control" aria-describedby="emailHelp" />
+                <div asp-validation-for="Email" class="invalid-feedback"></div>
             </div>
             <div class="mb-3">
-                <label for="pass" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="pass">
+                <label asp-for="Password" class="form-label">Password</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <div asp-validation-for="Password" class="invalid-feedback"></div>
             </div>
-            @if (!string.IsNullOrEmpty(ViewData["loginError"]?.ToString()))
-            {
-                <div class="invalid-feedback">
-                    ASDSADA
-                    @ViewData["loginError"].ToString()
-                </div>
-            }
+            <label asp-validation-summary="ModelOnly" class="invalid-feedback"></label>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

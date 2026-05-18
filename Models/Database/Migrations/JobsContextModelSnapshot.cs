@@ -109,7 +109,7 @@ namespace JobsApp.Models.Database.Migrations
                             isActive = true,
                             jobTitle = "Admin",
                             name = "Jorge G",
-                            password = "",
+                            password = "$2a$11$LIObUQLwXqTc6BZQRbuUQuuQZpJVIgcrhzHfziGf75npjMSS4UNkO",
                             phoneNumber = "3224785546",
                             roleId = 1
                         });
