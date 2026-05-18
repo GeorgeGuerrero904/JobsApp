@@ -29,6 +29,7 @@ namespace JobsApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model)
         {
+            ViewData["Title"] = "Login";
             if (ModelState.IsValid)
             {
                 User? logedUser = _userAccountService.loginUser(model.Email, model.Password);
@@ -47,7 +48,7 @@ namespace JobsApp.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(claimsIdentity));
 
-                    RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError(string.Empty, "Invalid email or password");
             }

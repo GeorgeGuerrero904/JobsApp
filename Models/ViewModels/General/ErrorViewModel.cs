@@ -1,4 +1,4 @@
-namespace JobsApp.Models
+namespace JobsApp.Models.ViewModels.General
 {
     public class ErrorViewModel
     {
